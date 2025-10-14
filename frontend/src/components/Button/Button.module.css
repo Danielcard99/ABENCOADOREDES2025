@@ -1,0 +1,15 @@
+.banner_button {
+  padding: 1rem;
+  font-size: 1.1rem;
+  color: var(--color-white);
+  background-color: var(--color-primary-dark);
+  border: 0;
+  border-radius: 1rem;
+  /* text-transform: uppercase; */
+  text-decoration: none;
+}
+
+.banner_button:hover {
+  background-color: var(--color-hover);
+  transition: 0.3s;
+}
