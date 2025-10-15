@@ -34,6 +34,7 @@ ABENCOADOREDES-PROJECT/
 - **CSS Modules** - Modular styling
 - **React Slick** - Image carousel
 - **React Icons** - Icons
+- **Fontsource** - Web fonts (Montserrat & Roboto)
 
 ### Frontend Structure
 
@@ -45,6 +46,7 @@ frontend/
 │   │   ├── Button/
 │   │   ├── Cards/
 │   │   ├── ContactForm/
+│   │   ├── Cta/
 │   │   ├── Footer/
 │   │   ├── Header/
 │   │   └── ScrollToTop/
@@ -73,6 +75,7 @@ frontend/
 
 ```bash
 cd frontend
+cp .env.example .env  # Configure environment variables
 pnpm install
 pnpm dev
 ```
@@ -85,9 +88,10 @@ The frontend will be available at `http://localhost:5173`
 
 - **NestJS** - Node.js framework
 - **TypeScript** - Static typing
-- **Nodemailer** - Email sending
+- **SendGrid** - Email sending service
 - **Class Validator** - Data validation
 - **Class Transformer** - Data transformation
+- **@nestjs/config** - Configuration management
 
 ### Backend Structure
 
@@ -116,18 +120,27 @@ Sends contact message via email.
   "name": "string",
   "email": "string",
   "phone": "string (Brazilian format)",
-  "mensagem": "string"
+  "message": "string (minimum 10 characters)"
 }
 ```
 
-### Backend Configuration
+### Environment Configuration
 
-Copy `.env.example` to `.env` in the `backend/` folder and configure your environment variables.
+**Backend:**
+Copy `.env.example` to `.env` in the `backend/` folder and configure:
+- `SENDGRID_API_KEY`: Your SendGrid API key
+- `SENDGRID_FROM`: Verified sender email in SendGrid
+- `CONTACT_RECEIVER`: Email to receive contact messages
+
+**Frontend:**
+Copy `.env.example` to `.env` in the `frontend/` folder and configure:
+- `VITE_API_URL`: Backend API URL (http://localhost:3000 for development)
 
 ### How to Run the Backend
 
 ```bash
 cd backend
+cp .env.example .env  # Configure environment variables
 pnpm install
 pnpm start:dev
 ```
@@ -140,11 +153,14 @@ The frontend communicates with the backend through REST API for:
 
 1. **Form Submission**: Contact messages are processed by the backend
 2. **Validation**: Data is validated on the backend using Class Validator
-3. **Notifications**: Emails are sent automatically via Nodemailer
+3. **Notifications**: Emails are sent automatically via SendGrid
+4. **Environment Variables**: Frontend uses `VITE_API_URL` for API communication
 
 ### CORS
 
-The backend is configured to accept requests from the frontend in development (`http://localhost:4173`).
+The backend is configured to accept requests from:
+- Development: `http://localhost:5173`
+- Production: `https://abencoadoredes-2025.vercel.app`
 
 ## 📦 Available Scripts
 
@@ -159,7 +175,11 @@ The backend is configured to accept requests from the frontend in development (`
 - `pnpm start:prod` - Start server in production mode
 - `pnpm build` - Compile the project
 - `pnpm test` - Run tests
+- `pnpm test:watch` - Run tests in watch mode
+- `pnpm test:cov` - Run tests with coverage
+- `pnpm test:e2e` - Run end-to-end tests
 - `pnpm lint` - Run linting
+- `pnpm format` - Format code with Prettier
 
 ## 🚀 Deploy
 
