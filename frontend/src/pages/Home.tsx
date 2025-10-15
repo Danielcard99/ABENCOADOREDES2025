@@ -4,7 +4,7 @@ import ContactForm from "../components/ContactForm/ContactForm";
 import Banner from "../components/Banner/Banner";
 import serviceImage from "../assets/images/banner3.jpeg";
 import Button from "../components/Button/Button";
-import myVideo from "../assets/images/WhatsApp Video 2025-10-02 at 15.37.50.mp4";
+import myVideo from "../assets/videos/WhatsApp Video 2025-10-02 at 15.37.50.mp4";
 
 import qualityIcon from "../assets/icons/quality-certificate-award-svgrepo-com.svg";
 import shieldIcon from "../assets/icons/shield-user-svgrepo-com.svg";
@@ -22,6 +22,8 @@ const Home: React.FC = () => {
           autoPlay
           loop
           muted
+          playsInline
+          preload="auto"
           className={styles.video_player}
         ></video>
         <div className={styles.background}></div>
