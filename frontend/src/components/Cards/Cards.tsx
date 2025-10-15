@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import Slider from "react-slick";
 import {
   FaShieldAlt,
@@ -84,18 +84,23 @@ export default function Cards({
 
   const items = data || defaultData;
 
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 600,
-    slidesToShow: 3,
+    slidesToShow: windowWidth < 768 ? 1 : windowWidth < 1024 ? 2 : 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
-    ],
   };
 
   return (
@@ -104,15 +109,17 @@ export default function Cards({
       <p className={styles.subtitle}>{subtitle}</p>
 
       {carousel ? (
-        <Slider {...settings} className={styles.carousel}>
-          {items.map((item, index) => (
-            <div key={index} className={styles.card}>
-              <div className={styles.icon}>{item.icon}</div>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </div>
-          ))}
-        </Slider>
+        <div className={styles.carousel}>
+          <Slider {...settings}>
+            {items.map((item, index) => (
+              <div key={index} className={styles.card}>
+                <div className={styles.icon}>{item.icon}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
+            ))}
+          </Slider>
+        </div>
       ) : (
         <div className={styles.grid}>
           {items.map((item, index) => (
