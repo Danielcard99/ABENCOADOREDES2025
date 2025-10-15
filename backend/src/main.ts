@@ -6,7 +6,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: ['http://localhost:5173', 'https://abencoadoredes-2025.vercel.app'],
+    origin: [
+      'http://localhost:5173',
+      'https://abencoadoredes-2025.vercel.app',
+      'https://abencoadoredes.com.br',
+      'https://www.abencoadoredes.com.br',
+    ],
   });
 
   app.useGlobalPipes(
