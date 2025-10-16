@@ -19,7 +19,14 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setFormData((prev) => {
+      if (name === "phone") {
+        const numericValue = value.replace(/\D/g, "");
+        return { ...prev, [name]: numericValue };
+      }
+      return { ...prev, [name]: value };
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,15 +34,17 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
     setStatus("Enviando...");
 
     try {
+      const payload = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim(),
+      };
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
