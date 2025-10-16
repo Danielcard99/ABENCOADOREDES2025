@@ -11,6 +11,8 @@ async function bootstrap() {
       'https://abencoadoredes-2025.vercel.app',
       'https://abencoadoredes.com.br',
       'https://www.abencoadoredes.com.br',
+      'http://abencoadoredes.com.br',
+      'http://www.abencoadoredes.com.br',
     ],
   });
 
