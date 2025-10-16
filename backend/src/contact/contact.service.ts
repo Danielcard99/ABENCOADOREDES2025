@@ -4,7 +4,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import sgMail from '@sendgrid/mail'; // ✅ import default
+import sgMail from '@sendgrid/mail';
 import { CreateContactDto } from './dto/create-contact.dto';
 
 @Injectable()
