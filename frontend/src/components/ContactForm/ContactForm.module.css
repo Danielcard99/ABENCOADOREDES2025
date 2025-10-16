@@ -63,7 +63,8 @@
   background-color: var(--color-hover);
 }
 
-.status {
+.status,
+.error {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -78,7 +79,8 @@
   border: 1px solid #2a7a2a;
 }
 
-.status-error {
+.status-error,
+.error {
   background-color: #ffe6e6;
   color: #d12a2a;
   border: 1px solid #d12a2a;

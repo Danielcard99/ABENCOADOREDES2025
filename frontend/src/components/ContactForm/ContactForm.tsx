@@ -14,24 +14,31 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
   });
 
   const [status, setStatus] = useState<string>("");
+  const [errors, setErrors] = useState<string[]>([]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => {
-      if (name === "phone") {
-        const numericValue = value.replace(/\D/g, "");
-        return { ...prev, [name]: numericValue };
-      }
-      return { ...prev, [name]: value };
-    });
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "phone" ? value.replace(/\D/g, "") : value,
+    }));
+    setErrors([]);
+    setStatus("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formData.message.trim().length < 10) {
+      setErrors(["A mensagem precisa ter no mínimo 10 caracteres."]);
+      return;
+    }
+
     setStatus("Enviando...");
+    setErrors([]);
 
     try {
       const payload = {
@@ -47,16 +54,24 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
         body: JSON.stringify(payload),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Erro ao enviar mensagem");
+        if (Array.isArray(data.message)) {
+          setErrors(data.message);
+        } else {
+          setErrors([data.message || "Erro ao enviar mensagem."]);
+        }
+        setStatus("");
+        return;
       }
 
-      const data = await response.json();
       setStatus(data.message || "Mensagem enviada com sucesso!");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {
       console.error(error);
-      setStatus("Erro ao enviar mensagem. Tente novamente.");
+      setErrors(["Erro ao enviar mensagem. Tente novamente."]);
+      setStatus("");
     }
   };
 
@@ -92,7 +107,7 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
       <label>
         Telefone
         <input
-          type="number"
+          type="text"
           name="phone"
           value={formData.phone}
           placeholder="Digite seu Telefone"
@@ -108,7 +123,7 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
           rows={4}
           value={formData.message}
           onChange={handleChange}
-          placeholder="Digite o assunto"
+          placeholder="Digite sua mensagem"
           required
         />
       </label>
@@ -117,7 +132,17 @@ const ContactForm: React.FC<ContactProps> = ({ className }) => {
         {status === "Enviando..." ? "Enviando..." : "Enviar"}
       </button>
 
-      {status && (
+      {errors.length > 0 && (
+        <div className={styles.errorList}>
+          {errors.map((err, i) => (
+            <p key={i} className={styles.error}>
+              {err}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {status && errors.length === 0 && (
         <p
           className={`${styles.status} ${
             status.includes("Erro")
