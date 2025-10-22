@@ -98,7 +98,7 @@ export default function Cards({
     infinite: true,
     speed: 600,
     slidesToShow: windowWidth < 768 ? 1 : windowWidth < 1024 ? 2 : 3,
-    slidesToScroll: 1,
+    slidesToScroll: windowWidth < 768 ? 1 : windowWidth < 1024 ? 2 : 3,
     autoplay: true,
     autoplaySpeed: 4000,
   };

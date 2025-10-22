@@ -27,7 +27,7 @@ const Contact: React.FC = () => {
             </div>
             <div className={styles.infoItem}>
               <FaEnvelope className={styles.icon} />
-              <p>contato@abencoadoredes.com</p>
+              <p>abencoadoredes@gmail.com</p>
             </div>
             <div className={styles.infoItem}>
               <FaMapMarkerAlt className={styles.icon} />

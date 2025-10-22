@@ -6,6 +6,11 @@ import styles from "./About.module.css";
 import Cards from "../components/Cards/Cards";
 import { FaBullseye, FaEye, FaGem } from "react-icons/fa6";
 import Cta from "../components/Cta/Cta";
+import abntImage from "../assets/abnt.png";
+import equiplexImage from "../assets/equiplex.png";
+import falcaoImage from "../assets/falcao.png";
+import inmetroImage from "../assets/inmetro.png";
+import isoImage from "../assets/iso.png";
 
 const About: React.FC = () => {
   return (
@@ -148,6 +153,14 @@ const About: React.FC = () => {
           <div className={styles.image_wrapper}>
             <img src={materialImage} alt="Rede de proteção de alta qualidade" />
           </div>
+        </div>
+
+        <div className={styles.certifications}>
+          <img src={abntImage} alt="Certificado ABNT" />
+          <img src={equiplexImage} alt="Certificado Equiplex" />
+          <img src={falcaoImage} alt="Certificado Falcão Bauer" />
+          <img src={inmetroImage} alt="Certificado INMETRO" />
+          <img src={isoImage} alt="Certificado INMETRO" />
         </div>
       </section>
 
