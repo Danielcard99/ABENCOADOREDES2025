@@ -37,7 +37,11 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className={styles.features}>
+      <section
+        data-aos="fade-down-left"
+        data-aos-delay="500"
+        className={styles.features}
+      >
         <div className={styles.features_display}>
           <div className={styles.features_wrapper}>
             <img
