@@ -86,7 +86,7 @@ const About: React.FC = () => {
           </span>
         </div>
 
-        <div className={styles.cards}>
+        <div data-aos="zoom-in" className={styles.cards}>
           <div className={styles.card}>
             <FaBullseye className={styles.icon} />
             <h3>Missão</h3>
