@@ -53,13 +53,25 @@
   margin-right: 0.1rem;
 }
 
+.nav_desktop {
+  display: flex;
+}
+
+.nav_mobile {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .menu_icon {
     display: block;
   }
 
-  .nav {
-    position: absolute;
+  .nav_desktop {
+    display: none;
+  }
+
+  .nav_mobile {
+    position: fixed;
     top: 60px;
     right: 0;
     width: 100%;
@@ -68,20 +80,22 @@
     transition: 0.4s ease;
     display: flex;
     justify-content: center;
+    z-index: 998;
   }
 
-  .nav.active {
-    height: 230px;
-    background: var(--color-neutral-light);
+  .nav_mobile.active {
+    height: 220px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
   }
 
-  .nav ul {
+  .nav_mobile ul {
     flex-direction: column;
     padding: 1rem;
     width: 100%;
   }
 
-  .nav ul a {
+  .nav_mobile ul a {
     width: 100%;
     display: flex;
   }
