@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "../components/Banner/Banner";
 import bannerImage from "../assets/images/banner4.jpeg";
-import materialImage from "../assets/images/varanda.jpeg";
+import materialImage from "../assets/images/varanda_com_vidros.jpeg";
 import styles from "./About.module.css";
 import Cards from "../components/Cards/Cards";
 import { FaBullseye, FaEye, FaGem } from "react-icons/fa6";
