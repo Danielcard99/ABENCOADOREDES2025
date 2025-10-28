@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 
       <section
         data-aos="fade-down-left"
-        data-aos-delay="500"
+        data-aos-delay="1000"
         className={styles.features}
       >
         <div className={styles.features_display}>
