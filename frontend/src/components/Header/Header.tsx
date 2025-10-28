@@ -42,83 +42,113 @@ const Header: React.FC = () => {
   }, [menuOpen]);
 
   return (
-    <header className={styles.header}>
-      <a href="/">
-        <img src={logo} alt="Logo do Abençoado Redes" className={styles.logo} />
-      </a>
+    <>
+      <header className={styles.header}>
+        <a href="/">
+          <img
+            src={logo}
+            alt="Logo do Abençoado Redes"
+            className={styles.logo}
+          />
+        </a>
 
-      <div className={styles.menu_icon} ref={menuIconRef} onClick={toggleMenu}>
-        {menuOpen ? <FaTimes /> : <FaBars />}
-      </div>
+        <div
+          className={styles.menu_icon}
+          ref={menuIconRef}
+          onClick={toggleMenu}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </div>
+
+        <nav className={styles.nav_desktop}>
+          <ul className={styles.menu}>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? styles.active_link : undefined
+                }
+              >
+                <GoHome className={styles.icon} /> Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? styles.active_link : undefined
+                }
+              >
+                <GoPerson className={styles.icon} /> Quem Somos
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/services"
+                className={({ isActive }) =>
+                  isActive ? styles.active_link : undefined
+                }
+              >
+                <GoTools className={styles.icon} /> Serviços
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/gallery"
+                className={({ isActive }) =>
+                  isActive ? styles.active_link : undefined
+                }
+              >
+                <GoFileMedia className={styles.icon} /> Galeria
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? styles.active_link : undefined
+                }
+              >
+                <BsTelephone className={styles.icon} /> Contato
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
 
       <nav
         ref={navRef}
-        className={`${styles.nav} ${menuOpen ? styles.active : ""}`}
+        className={`${styles.nav_mobile} ${menuOpen ? styles.active : ""}`}
       >
         <ul className={styles.menu}>
           <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? styles.active_link : undefined
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              <GoHome className={styles.icon} />
-              Home
+            <NavLink to="/" onClick={() => setMenuOpen(false)}>
+              <GoHome className={styles.icon} /> Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? styles.active_link : undefined
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              <GoPerson className={styles.icon} />
-              Quem Somos
+            <NavLink to="/about" onClick={() => setMenuOpen(false)}>
+              <GoPerson className={styles.icon} /> Quem Somos
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/services"
-              className={({ isActive }) =>
-                isActive ? styles.active_link : undefined
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              <GoTools className={styles.icon} />
-              Serviços
+            <NavLink to="/services" onClick={() => setMenuOpen(false)}>
+              <GoTools className={styles.icon} /> Serviços
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/gallery"
-              className={({ isActive }) =>
-                isActive ? styles.active_link : undefined
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              <GoFileMedia className={styles.icon} />
-              Galeria
+            <NavLink to="/gallery" onClick={() => setMenuOpen(false)}>
+              <GoFileMedia className={styles.icon} /> Galeria
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive ? styles.active_link : undefined
-              }
-              onClick={() => setMenuOpen(false)}
-            >
-              <BsTelephone className={styles.icon} />
-              Contato
+            <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
+              <BsTelephone className={styles.icon} /> Contato
             </NavLink>
           </li>
         </ul>
       </nav>
-    </header>
+    </>
   );
 };
 
