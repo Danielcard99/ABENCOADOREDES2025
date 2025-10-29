@@ -50,10 +50,21 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div>
-        <p className={styles.copy}>
+      <div className={styles.copy}>
+        <p>
           © {new Date().getFullYear()} Abençoado Redes. Todos os direitos
           reservados.
+        </p>
+
+        <p className={styles.dev}>
+          Desenvolvido por{" "}
+          <a
+            href="https://github.com/Danielcard99"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Daniel Cardoso
+          </a>
         </p>
       </div>
     </footer>
