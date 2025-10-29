@@ -122,27 +122,57 @@ const Header: React.FC = () => {
       >
         <ul className={styles.menu}>
           <li>
-            <NavLink to="/" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? styles.active_link : undefined
+              }
+              onClick={() => setMenuOpen(false)}
+            >
               <GoHome className={styles.icon} /> Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? styles.active_link : undefined
+              }
+              onClick={() => setMenuOpen(false)}
+            >
               <GoPerson className={styles.icon} /> Quem Somos
             </NavLink>
           </li>
           <li>
-            <NavLink to="/services" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                isActive ? styles.active_link : undefined
+              }
+              onClick={() => setMenuOpen(false)}
+            >
               <GoTools className={styles.icon} /> Serviços
             </NavLink>
           </li>
           <li>
-            <NavLink to="/gallery" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                isActive ? styles.active_link : undefined
+              }
+              onClick={() => setMenuOpen(false)}
+            >
               <GoFileMedia className={styles.icon} /> Galeria
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? styles.active_link : undefined
+              }
+              onClick={() => setMenuOpen(false)}
+            >
               <BsTelephone className={styles.icon} /> Contato
             </NavLink>
           </li>
