@@ -56,11 +56,22 @@
 }
 
 .copy {
-  text-align: center;
   max-width: 1280px;
   margin: 5rem auto 0;
   font-size: 0.9rem;
   color: var(--color-neutral-light);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dev a {
+  color: var(--color-neutral-light);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 4rem 2rem;
+  }
 }
