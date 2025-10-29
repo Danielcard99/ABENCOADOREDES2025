@@ -127,9 +127,11 @@ backend/
 ### API Endpoints
 
 #### POST `/contact`
+
 Sends contact message via email.
 
 **Body:**
+
 ```json
 {
   "name": "string",
@@ -143,6 +145,7 @@ Sends contact message via email.
 
 **Backend:**
 Copy `.env.example` to `.env` in the `backend/` folder and configure:
+
 - `SENDGRID_API_KEY`: Your SendGrid API key ([Get it here](https://app.sendgrid.com/settings/api_keys))
 - `SENDGRID_FROM`: Verified sender email in SendGrid ([Verify here](https://app.sendgrid.com/settings/sender_auth))
 - `CONTACT_RECEIVER`: Email to receive contact messages
@@ -150,6 +153,7 @@ Copy `.env.example` to `.env` in the `backend/` folder and configure:
 
 **Frontend:**
 Copy `.env.example` to `.env` in the `frontend/` folder and configure:
+
 - `VITE_API_URL`: Backend API URL (http://localhost:3000 for development)
 
 #### SendGrid Setup
@@ -182,18 +186,21 @@ The frontend communicates with the backend through REST API for:
 ### CORS
 
 The backend is configured to accept requests from:
+
 - Development: `http://localhost:5173`
 - Production: `https://abencoadoredes-2025.vercel.app`
 
 ## 📦 Available Scripts
 
 ### Frontend
+
 - `pnpm dev` - Start development server
 - `pnpm build` - Generate production build
 - `pnpm preview` - Preview production build
 - `pnpm lint` - Run linting
 
 ### Backend
+
 - `pnpm start:dev` - Start server in development mode
 - `pnpm start:prod` - Start server in production mode
 - `pnpm build` - Compile the project
@@ -207,13 +214,17 @@ The backend is configured to accept requests from:
 ## 🚀 Deploy
 
 ### Frontend
+
 The frontend can be deployed on any static hosting service:
+
 - Vercel
 - Netlify
 - GitHub Pages
 
 ### Backend
+
 The backend can be deployed on:
+
 - Heroku
 - Railway
 - DigitalOcean
@@ -239,28 +250,33 @@ The backend can be deployed on:
 ### Common Issues
 
 **Frontend not connecting to backend:**
+
 - Check if `VITE_API_URL` is correctly set in frontend `.env`
 - Ensure backend is running on the correct port
 - Verify CORS configuration in backend
 
 **Email not sending:**
+
 - Verify SendGrid API key is valid
 - Check if sender email is verified in SendGrid
 - Ensure `SENDGRID_FROM` matches verified email
 
 **Build errors:**
+
 - Clear node_modules and reinstall: `rm -rf node_modules && pnpm install`
 - Check Node.js version compatibility
 
 ## 🔄 Development Workflow
 
 1. **Start Backend** (Terminal 1):
+
    ```bash
    cd backend
    pnpm start:dev
    ```
 
 2. **Start Frontend** (Terminal 2):
+
    ```bash
    cd frontend
    pnpm dev
@@ -291,4 +307,5 @@ For questions about the project, contact us through the website form or through 
 
 ---
 
-**Developed with ❤️ for Abençoado Redes**
+**Developed with ❤️ for Abençoado Redes**  
+by [Daniel Cardoso](https://github.com/Danielcard99)
