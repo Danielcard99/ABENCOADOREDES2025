@@ -1,30 +1,33 @@
 import {
   Injectable,
-  InternalServerErrorException,
   Logger,
+  ServiceUnavailableException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import sgMail from '@sendgrid/mail';
 import { CreateContactDto } from './dto/create-contact.dto';
+import { Resend } from 'resend';
 
 @Injectable()
 export class ContactService {
   private readonly logger = new Logger(ContactService.name);
+  private readonly resend: Resend;
 
   constructor(private readonly configService: ConfigService) {
-    const apiKey = this.configService.get<string>('SENDGRID_API_KEY');
+    const apiKey = this.configService.get<string>('RESEND_API_KEY');
+
     if (!apiKey) {
-      throw new Error('SENDGRID_API_KEY não configurada.');
+      throw new Error('RESEND_API_KEY não configurada.');
     }
-    sgMail.setApiKey(apiKey);
+
+    this.resend = new Resend(apiKey);
   }
 
   async sendMessage(dto: CreateContactDto) {
-    const from = this.configService.get<string>('SENDGRID_FROM');
+    const from = this.configService.get<string>('RESEND_FROM');
     const to = this.configService.get<string>('CONTACT_RECEIVER');
 
     if (!from || !to) {
-      throw new Error('Variáveis SENDGRID_FROM ou CONTACT_RECEIVER ausentes');
+      throw new Error('Variáveis RESEND_FROM ou CONTACT_RECEIVER ausentes');
     }
 
     const html = `
@@ -43,25 +46,22 @@ export class ContactService {
       </div>
     `;
 
-    const msg = {
-      to,
-      from: {
-        email: from,
-        name: 'Abençoado Redes',
-      },
-      subject: `Contato de ${dto.name}`,
-      html,
-      replyTo: dto.email,
-    };
-
     try {
-      await sgMail.send(msg);
+      await this.resend.emails.send({
+        from: `Abençoado Redes <${from}>`,
+        to: [to],
+        subject: `Contato de ${dto.name}`,
+        replyTo: dto.email,
+        html,
+      });
+
       this.logger.log(`Mensagem enviada com sucesso por ${dto.email}`);
       return { message: 'Mensagem enviada com sucesso!' };
     } catch (error) {
-      this.logger.error('Erro ao enviar mensagem via SendGrid', error);
-      throw new InternalServerErrorException(
-        'Erro ao enviar a mensagem. Tente novamente mais tarde.',
+      this.logger.error('Erro ao enviar mensagem via Resend', error);
+
+      throw new ServiceUnavailableException(
+        'Serviço de e-mail temporariamente indisponível. Tente novamente mais tarde.',
       );
     }
   }
